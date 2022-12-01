@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: githubApp
+  name: myapp
 spec:
   selector:
     matchLabels:
-      app: myGithubapp
+      app: myapp
   replicas: 4
   template:
     metadata:
       labels:
-        app: myGithubapp
+        app: myapp
     spec:
       containers:
-      - name: myGithubappContainer
+      - name: myapp
         image: nanajanashia/argocd-app:1.1
         ports:
         - containerPort: 8080
