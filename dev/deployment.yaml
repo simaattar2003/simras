@@ -1,3 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-deployment-nfs2
+spec:
+  accessModes:
+    - ReadWriteMany  # In this example, multiple Pods consume the same PVC.
+  resources:
+    requests:
+      storage: 1Mi 
+  storageClassName: nfs-csi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,3 +29,14 @@ spec:
         image: nanajanashia/argocd-app:1.1
         ports:
         - containerPort: 8080
+      containers:
+        - name: myapp2
+          image: mcr.microsoft.com/oss/nginx/nginx:1.19.5
+          volumeMounts:
+            - name: nfs
+              mountPath: "/mnt/nfs"
+      volumes:
+        - name: nfs
+          persistentVolumeClaim:
+            claimName: pvc-deployment-nfs2
+
