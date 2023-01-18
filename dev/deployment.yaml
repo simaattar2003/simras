@@ -25,11 +25,6 @@ spec:
         app: myapp2
     spec:
       containers:
-      - name: myapp2
-        image: nanajanashia/argocd-app:1.1
-        ports:
-        - containerPort: 8080
-      containers:
         - name: myapp2
           image: mcr.microsoft.com/oss/nginx/nginx:1.19.5
           volumeMounts:
